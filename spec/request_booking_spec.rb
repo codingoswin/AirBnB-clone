@@ -1,4 +1,5 @@
 require 'booking'
+require 'booking_repository'
 
 def reset_tables
     seed_sql = File.read('spec/seeds/bookings_seeds.sql')
@@ -26,8 +27,24 @@ RSpec.describe Booking do
             booking = Booking.new
             expect(booking.class).to eq(Booking)
         end 
-        it 'checks a booking appears in the booking table' do 
+        it 'checks a booking appears in the booking table' do
+            repo = BookingRepository.new
+            new_booking = Booking.new
 
+            new_booking.space_id = 4
+            new_booking.start_date = '2022-09-01'
+            new_booking.end_date = '2022-09-08'
+            new_booking.user_id = 2
+
+            repo.create(new_booking)
+
+            all_bookings = repo.all
+            expect(all_bookings.last.space_id).to eq 4
+            expect(all_bookings.last.start_date).to eq '2022-09-01'
+            expect(all_bookings.last.end_date).to eq '2022-09-08'
+            expect(all_bookings.last.user_id).to eq 2
+            expect(all_bookings.last.id).to eq 4
+        
         end 
     end 
 end 
