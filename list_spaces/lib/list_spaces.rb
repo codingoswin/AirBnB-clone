@@ -7,7 +7,6 @@ class ListSpaces
         fail "Cannot add empty space" if space.empty?
         @list << space
     
-
     end
 
     def list
