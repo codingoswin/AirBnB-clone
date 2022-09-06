@@ -4,9 +4,9 @@ class ListSpaces
     end
 
     def add(space)
-        fail "Cannot add empty space" unless @list.empty?
+        fail "Cannot add empty space" if space.empty?
         @list << space
-
+    
     end
 
     def list
