@@ -70,7 +70,7 @@ GET /bookings/new
 Response for 200 OK:
 <!-- file: views/new_booking.erb -->
 
-<h1>Make a booking</h1>
+<h1>Make a new booking request booking</h1>
 
 <form action="/bookings" method="POST">
 
@@ -106,49 +106,49 @@ Response for 200 OK:
 # EXAMPLE
 # file: spec/integration/application_spec.rb
 
-require "spec_helper"
+# require "spec_helper"
 
-describe Application do
-    include Rack::Test::Methods
+# describe Application do
+#     include Rack::Test::Methods
 
-    let(:app) { Application.new }
+#     let(:app) { Application.new }
 
-    context "GET /albums/new" do
-        it 'returns the new artist form page' do
-        response = get('/artists/new')
-        expect(response.status).to eq(200)
-        expect(response.body).to include('<h1>Add an artist</h1>')
-        end
-    end
+#     context "GET /albums/new" do
+#         it 'returns the new artist form page' do
+#         response = get('/artists/new')
+#         expect(response.status).to eq(200)
+#         expect(response.body).to include('<h1>Add an artist</h1>')
+#         end
+#     end
 
-    context "POST /artists" do
-        it 'returns a success page' do
-        # We're now sending a POST request,
-        # simulating the behaviour that the HTML form would have.
-        response = post(
-            '/artists',
-            name: 'Johnny Cash',
-            genre: 'Western',
-        )
-        expect(response.status).to eq(200)
-        expect(response.body).to include('<p>Your artist has been added!</p>')
-        end
+#     context "POST /artists" do
+#         it 'returns a success page' do
+#         # We're now sending a POST request,
+#         # simulating the behaviour that the HTML form would have.
+#         response = post(
+#             '/artists',
+#             name: 'Johnny Cash',
+#             genre: 'Western',
+#         )
+#         expect(response.status).to eq(200)
+#         expect(response.body).to include('<p>Your artist has been added!</p>')
+#         end
   
-        it 'responds with 400 status if parameters are invalid' do
-        response = post(
-            '/artist',
-            wrong_name: 'Johnny Money',
-            wrong_genre: 'Easter',
-        )
-        expect(response.status).to eq(400)
-        expect(response.body).to eq('<p>No good - try again</p>')
-        end
-  end
-end
-```
+#         it 'responds with 400 status if parameters are invalid' do
+#         response = post(
+#             '/artist',
+#             wrong_name: 'Johnny Money',
+#             wrong_genre: 'Easter',
+#         )
+#         expect(response.status).to eq(400)
+#         expect(response.body).to eq('<p>No good - try again</p>')
+#         end
+#   end
+# end
+# ```
 
 
 
-## 5. Implement the Route
+# ## 5. Implement the Route
 
-Write the route and web server code to implement the route behaviour.
+# Write the route and web server code to implement the route behaviour.

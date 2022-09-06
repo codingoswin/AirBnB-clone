@@ -1,5 +1,8 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
+require_relative 'lib/database_connection'
+require_relative 'lib/booking_repository'
+require_relative 'lib/booking'
 
 class Application < Sinatra::Base
   # This allows the app code to refresh
@@ -7,4 +10,11 @@ class Application < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
+
+  get '/bookings/new' do
+    return erb(:new_booking)
+  end
+
+
+  #POST bookings
 end
