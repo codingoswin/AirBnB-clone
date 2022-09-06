@@ -1,0 +1,13 @@
+<!-- file: views/new_booking.erb -->
+
+<h1>Make a new booking request</h1>
+
+<form action="/bookings" method="POST">
+
+  User ID: <input type="text" name="user_id">
+  Space: <input type="text" name="space">
+  Check-in date: <input type="date" name="start_date">
+  Check-out date: <input type="date" name="end_date">
+  <input type="submit" value="Submit the form">
+
+</form>
