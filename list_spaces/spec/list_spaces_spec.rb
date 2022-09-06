@@ -11,7 +11,7 @@ RSpec.describe ListSpaces do
         end
         it 'User does not input a space or invalid space' do
             list_spaces = ListSpaces.new    
-            expect{ list_spaces.add(' ') }.to raise_error "Cannot add empty space"
+            expect{ list_spaces.add('')}.to raise_error "Cannot add empty space"
         end
     end
 end 
