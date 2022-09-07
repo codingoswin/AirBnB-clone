@@ -3,6 +3,7 @@ require 'sinatra/reloader'
 require_relative 'lib/database_connection'
 require_relative 'lib/booking_repository'
 require_relative 'lib/list_spaces_repository'
+require_relative 'lib/booking'
 
 DatabaseConnection.connect
 
@@ -30,6 +31,11 @@ class Application < Sinatra::Base
     @space.owner_id = params[:owner_id]
     return erb(:new_booking)
   end
+
+  post '/bookings/available' do
+    @spaces = SpaceRepository.new
+    return erb(:available_bookings)
+  end 
 
   post '/bookings' do 
     return erb(:confirmation_booking)

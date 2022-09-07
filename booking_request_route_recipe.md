@@ -22,13 +22,29 @@ HTML form returned
 
 <h1>Make a booking</h1>
 
-<form action="/bookings" method="POST">
+<form action="/bookings/available" method="POST">
 
   User ID: <input type="text" name="user_id">
-  Space: <input type="text" name="space">
   Check-in date: <input type="date" name="start_date">
   Check-out date: <input type="date" name="end_date">
-  <input type="submit" value="Submit the form">
+  <input type="submit" value="Search">
+
+</form>
+
+POST /bookings/available
+
+<h1>Available Spaces</h1>
+
+<form action="/bookings" method="POST">
+
+<% @spaces.all.each do |space| %>
+    <tr>
+      <% if available? == true %>
+      <td><%=space.name%></td>
+      <td><input type="submit" value="Book now!"></td>
+      <% end %>
+    </tr>
+  <% end %>
 
 </form>
 

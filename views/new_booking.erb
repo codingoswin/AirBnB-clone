@@ -2,24 +2,13 @@
 
 <h1>Make a new booking request</h1>
 
-<form action="/bookings" method="POST">
+<form action="/bookings/available" method="POST">
 
   User ID: <input type="text" name="user_id">
-  
-<table>
-  <tr>
-    <th>Space name</th>
-    <th>Check in date</th>
-    <th>Check out date</th>
-    <th>Book now!</th>
-  </tr>
-  <% @spaces.all.each do |space| %>
-    <tr>
-      <td><%=space.name%></td>
-      <td><input type="date" name="start_date"></td>
-      <td><input type="date" name="end_date"></td>
-      <td><input type="submit" value="Book now!"></td>
-    </tr>
-  <% end %>
-</table>
+
+  Check-in date: <input type="date" name="start_date">
+  Check-out date: <input type="date" name="end_date">
+  <input type="submit" value="Search">
+
 </form>
+  
