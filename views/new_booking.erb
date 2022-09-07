@@ -11,3 +11,21 @@
   <input type="submit" value="Submit the form">
 
 </form>
+
+
+<table>
+  <tr>
+    <th>Space name</th>
+    <th>Check in date</th>
+    <th>Check out date</th>
+    <th>Book now!</th>
+  </tr>
+  <% @spaces.each do |space| %>
+    <tr>
+      <td><%=space.name%></td>
+      <td><%=space.checkin_date%></td>
+      <td><%=space.checkout_date%></td>
+      <td>Button</td>
+    </tr>
+  <% end %>
+</table>
