@@ -46,5 +46,21 @@ RSpec.describe Booking do
             expect(all_bookings.last.id).to eq 4
         
         end 
-    end 
+    end
+    
+    context 'Owner has confirmed booking request' do
+        it 'checks the status of a booking' do
+            booking_repo = BookingRepository.new
+            booking = Booking.new
+            booking.id = 5
+            booking.space_id = 1
+            booking.start_date = '2022-02-05'
+            booking.end_date = '2022-02-10'
+            booking.user_id = 3
+            booking.status = 'unconfirmed'
+            booking_repo.create(booking)
+
+            expect(booking_repo.all.last.status).to eq 'unconfirmed'
+        end
+    end
 end 
