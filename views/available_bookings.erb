@@ -1,0 +1,11 @@
+<h1>Available Spaces</h1>
+<form action="/bookings" method="POST">
+<table>
+  <% @spaces.all.each do |space| %>
+    <tr>
+      <td><%=space.name%></td>
+      <td><input type="submit" value="Book now!"></td>
+    </tr>
+  <% end %>
+</table>
+</form>
