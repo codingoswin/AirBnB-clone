@@ -48,20 +48,4 @@ describe Application do
     
     end
 
-    
-
 end
-
-# it 'should create a new album' do
-#     response = post(
-#       'albums',
-#       title: 'Voyage',
-#       release_year: '2022',
-#       artist_id: '2'
-#     )
-#     expect(response.status).to eq(200)
-#     expect(response.body).to include ('<p>Your album has been added!</p>')
-    
-#     response = get("/albums")
-#     expect(response.body).to include ("Voyage")
-#   end

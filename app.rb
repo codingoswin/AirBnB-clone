@@ -17,6 +17,18 @@ class Application < Sinatra::Base
   end
 
   get '/bookings/new' do
+    @spaces = SpaceRepository.new 
+    @space = Space.new 
+    @booking_repo = BookingRepository.new
+    @booking = Booking.new
+    @booking.start_date = params[:start_date]
+    @booking.end_date = params[:end_date]
+    @booking.space_id = params[:space_id]
+    @booking.user_id = params[:user_id]
+    @booking_repo.create(@booking)
+    @space.name = params[:name]
+    @space.availability = params[:availability]
+    @space.owner_id = params[:owner_id]
     return erb(:new_booking)
   end
 
@@ -30,3 +42,4 @@ class Application < Sinatra::Base
   end 
 
 end
+
