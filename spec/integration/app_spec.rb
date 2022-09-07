@@ -9,7 +9,7 @@ describe Application do
     let(:app) { Application.new }
 
     context 'GET bookings/new' do
-        it ' has a form to request a booking' do
+        it 'has a form to request a booking' do
             response = get('/bookings/new')
             expect(response.status).to eq(200)
             expect(response.body).to include('<h1>Make a new booking request</h1>')
