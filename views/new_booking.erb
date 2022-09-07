@@ -5,14 +5,7 @@
 <form action="/bookings" method="POST">
 
   User ID: <input type="text" name="user_id">
-  Space: <input type="text" name="space">
-  Check-in date: <input type="date" name="start_date">
-  Check-out date: <input type="date" name="end_date">
-  <input type="submit" value="Submit the form">
-
-</form>
-
-
+  
 <table>
   <tr>
     <th>Space name</th>
@@ -20,12 +13,13 @@
     <th>Check out date</th>
     <th>Book now!</th>
   </tr>
-  <% @spaces.each do |space| %>
+  <% @spaces.all.each do |space| %>
     <tr>
       <td><%=space.name%></td>
-      <td><%=space.checkin_date%></td>
-      <td><%=space.checkout_date%></td>
-      <td>Button</td>
+      <td><input type="date" name="start_date"></td>
+      <td><input type="date" name="end_date"></td>
+      <td><input type="submit" value="Book now!"></td>
     </tr>
   <% end %>
 </table>
+</form>
