@@ -1,4 +1,4 @@
-require 'list_spaces_repository'
+require 'list_spaces'
 
 def reset_tables
     seed_sql = File.read('spec/seeds/bookings_seeds.sql')
