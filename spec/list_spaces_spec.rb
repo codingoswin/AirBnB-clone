@@ -22,7 +22,7 @@ RSpec.describe SpaceRepository do
             new_space.owner_id = 1
             repo.add(new_space)
             all_spaces = repo.all
-            expect(all_spaces.length).to eq 6
+            expect(all_spaces.length).to eq 6   
         end
         # it 'User does not input a space or invalid space' do
         #     list_spaces = SpaceRepository.new    

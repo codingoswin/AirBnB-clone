@@ -9,7 +9,7 @@ When booking a place I want to be able to send a booking request
 Put the different nouns in this table. Replace the example with your own nouns.
 
 Record	    Properties
-bookings    space_id, start date, end date, user_id (booker)
+bookings    space_id, start date, end date, user_id (booker), status
 users       name, email
 spaces      name, status (available/unavailable), user_id (owner) 
 
@@ -19,9 +19,9 @@ Column names: email, name
 
 # Name of the second table (always plural): bookings
 
-Column names: space, start date, end date, user_id
+Column names: space, start date, end date, user_id, status
 
-# Name of the third table (always plural): bookings
+# Name of the third table (always plural): spaces
 
 Column names: id, name, owner_id, status
 
@@ -46,6 +46,7 @@ space: text
 start_date: date
 end_date: date
 user_id: int
+status: text
 
 Table: spaces
 id: SERIAL
@@ -114,6 +115,7 @@ CREATE TABLE bookings (
   id SERIAL PRIMARY KEY,
   start_date date,
   end_date date,
+  status text,
 -- The foreign key name is always {other_table_singular}_id
   space_id int,
   constraint fk_space foreign key(space_id)
