@@ -9,7 +9,7 @@ describe Application do
     let(:app) { Application.new }
 
     context 'GET bookings/new' do
-        it ' has a form to request a booking' do
+        it 'has a form to request a booking' do
             response = get('/bookings/new')
             expect(response.status).to eq(200)
             expect(response.body).to include('<h1>Make a new booking request</h1>')
@@ -17,12 +17,34 @@ describe Application do
         end
     end
 
+    context ' POST /bookings' do 
+        it'returns a confirmation HTML page' do
+            response = post('bookings', 
+                start_date: '2022-09-04', 
+                end_date: '2022-09-10', 
+                space: '5', 
+                user_id: '1')
+
+            expect(response.status).to eq(200)
+            expect(response.body).to include('<p>Your booking request was sent!</p>')
+        end
+    
+    end
+
+    
+
 end
 
-# context "GET /albums/new" do
-#     it 'returns the new artist form page' do
-#       response = get('/artists/new')
-#       expect(response.status).to eq(200)
-#       expect(response.body).to include('<h1>Add an artist</h1>')
-#     end
-# end
+# it 'should create a new album' do
+#     response = post(
+#       'albums',
+#       title: 'Voyage',
+#       release_year: '2022',
+#       artist_id: '2'
+#     )
+#     expect(response.status).to eq(200)
+#     expect(response.body).to include ('<p>Your album has been added!</p>')
+    
+#     response = get("/albums")
+#     expect(response.body).to include ("Voyage")
+#   end

@@ -9,7 +9,7 @@ When booking a place I want to be able to send a booking request
 Put the different nouns in this table. Replace the example with your own nouns.
 
 Record	    Properties
-bookings    space, start date, end date, user_id (booke)
+bookings    space_id, start date, end date, user_id (booker)
 users       name, email
 spaces      name, status (available/unavailable), user_id (owner) 
 

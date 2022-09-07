@@ -15,6 +15,8 @@ class Application < Sinatra::Base
     return erb(:new_booking)
   end
 
+  post '/bookings' do 
+    return erb(:confirmation_booking)
+  end 
 
-  #POST bookings
 end
