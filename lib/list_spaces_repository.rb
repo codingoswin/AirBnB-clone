@@ -9,7 +9,7 @@ class SpaceRepository
         result_set = DatabaseConnection.exec_params(sql, [])
 
         result_set.each do |record|
-            space = SpaceRepository.new
+            space = Space.new
 
             space.id = record['id'].to_i
             space.name = record['name']
@@ -20,11 +20,13 @@ class SpaceRepository
         return spaces
     end
 
-    # def add(space)
-    #     fail "Cannot add empty space" if space.empty?
-    #     @list << space
-    
-    # end
+    def add(space)
+        fail "Cannot add empty space" if space == nil
+        sql = 'INSERT INTO spaces (name, availability, owner_id) VALUES ($1, $2, $3);'
+        result_set = DatabaseConnection.exec_params(sql, [space.name, space.availability, space.owner_id])
+        return space
+    end
+
 
     # def list
     #    return @list
