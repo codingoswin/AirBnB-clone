@@ -38,14 +38,12 @@ class BookingRepository
  
             booking_in_date = record['start_date']
             booking.start_date = Date.parse(booking_in_date)
-            #binding.irb
+
             booking_out_date = record['end_date']
             booking.end_date = Date.parse(booking_out_date)
-            #binding.irb
+
             date_range = ((booking.start_date .. booking.end_date).each{|date| date}).to_a
-            # booking.status = record['status']
-            # booking.user_id = record['user_id'].to_i
-            #binding.irb
+
             user_dates.each do |date|
                 if date_range.any?(date)
                     booking_clashes << booking.space_id
