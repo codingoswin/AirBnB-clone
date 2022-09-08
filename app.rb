@@ -20,6 +20,27 @@ class Application < Sinatra::Base
     return erb(:login)
   end
 
+  post '/login' do
+    name = params[:name]
+    email = params[:email]
+    password = params[:password]
+
+    user = UserRepository.find_by_email(email)
+
+    # This is a simplified way of 
+    # checking the password. In a real 
+    # project, you should encrypt the password
+    # stored in the database.
+    if user.password == password
+      # Set the user ID in session
+      # session[:user_id] = user.id
+
+      return erb(:login_success)
+    else
+      return erb(:login_error)
+    end
+  end
+
   get '/bookings/new' do
     @spaces = SpaceRepository.new 
     @space = Space.new 
