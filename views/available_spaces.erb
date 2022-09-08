@@ -2,10 +2,12 @@
 <form action="/bookings" method="POST">
 <table>
   <% @spaces.all.each do |space| %>
+  <% if !(@booking_clashes.include?(space.id)) %>
     <tr>
       <td><%=space.name%></td>
       <td><input type="submit" value="Book now!"></td>
     </tr>
+  <% end %>
   <% end %>
 </table>
 </form>
