@@ -78,6 +78,18 @@ describe Application do
             expect(response.body).to include('<input type="submit" value="Book now!">')
         end
 
+        it 'returns only spaces that are available for a date overlapping 2 months' do 
+            response = post('/spaces/available',
+                user_id: 1,
+                start_date: '2022-03-25',
+                end_date: '2022-04-05'
+            )
+
+            expect(response.status).to eq(200)
+            expect(response.body).to include('<h1>Available Spaces</h1>')
+            expect(response.body).not_to include('City Apartment')
+            expect(response.body).not_to include('Country home')
+        end
     end
 
     context ' POST /bookings' do 
