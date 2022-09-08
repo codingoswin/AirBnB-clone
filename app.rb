@@ -5,6 +5,8 @@ require_relative 'lib/booking_repository'
 require_relative 'lib/list_spaces_repository'
 require_relative 'lib/booking'
 require 'date'
+require_relative 'lib/user_repository'
+require_relative 'lib/user'
 
 DatabaseConnection.connect
 
@@ -15,6 +17,31 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
     also_reload 'lib/booking_repository'
     also_reload 'lib/list_spaces_repository'
+  end
+
+  get '/login' do
+    return erb(:login)
+  end
+
+  post '/login' do
+    name = params[:name]
+    email = params[:email]
+    password = params[:password]
+
+    user = UserRepository.find_by_email(email)
+
+    # This is a simplified way of 
+    # checking the password. In a real 
+    # project, you should encrypt the password
+    # stored in the database.
+    if user.password == password
+      # Set the user ID in session
+      # session[:user_id] = user.id
+
+      return erb(:login_success)
+    else
+      return erb(:login_error)
+    end
   end
 
   get '/bookings/new' do
@@ -56,5 +83,18 @@ class Application < Sinatra::Base
     return erb(:confirmation_booking)
   end 
 
-end
+  get '/' do
+    return erb(:homepage)
+  end
+  
+  post '/' do
+    user_repo = UserRepository.new
+    new_user = User.new
+    new_user.name = params['name']
+    new_user.email = params['email']
+    new_user.password = params['password']
+    user_repo.create(new_user)
+    return erb(:signup_success)
+  end
 
+end

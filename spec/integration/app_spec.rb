@@ -17,6 +17,27 @@ describe Application do
     before(:each) do 
         reset_tables 
     end
+    
+    context "GET /login" do
+        it 'returns the login page' do
+        response = get('/login')
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>Welcome to Papaya BnB</h1>')
+        end
+    end
+
+    context "POST /login" do
+        it 'returns a successful login page' do
+        response = post(
+            '/login',
+            name: 'Sam',
+            email: 'sam@makersbnb.com',
+            password: 'password!123'
+        )
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<p>You have logged in successfully!</p>')
+        end
+    end
 
     context 'GET bookings/new' do
         it 'has a form to request a booking' do
@@ -41,7 +62,8 @@ describe Application do
             expect(response.body).to include('<td>Beach house</td>')
             expect(response.body).to include('<td>Mountain view</td>')
             expect(response.body).to include('<input type="submit" value="Book now!">')
-    end
+ 
+        end
 
         it 'returns only spaces that are not booked on those dates' do
             response = post('/spaces/available',
@@ -66,21 +88,13 @@ describe Application do
             expect(response.body).to include('<p>Your booking request was sent!</p>')
         end
     end
-
     
+    context 'GET /' do
+        it 'homepage with form for new users to sign up' do
+            response = get('/')
 
+            expect(response.status).to eq(200)
+            expect(response.body).to include ('<h1>Papaya BnB</h1>')
+        end
+    end
 end
-
-# it 'should create a new album' do
-#     response = post(
-#       'albums',
-#       title: 'Voyage',
-#       release_year: '2022',
-#       artist_id: '2'
-#     )
-#     expect(response.status).to eq(200)
-#     expect(response.body).to include ('<p>Your album has been added!</p>')
-    
-#     response = get("/albums")
-#     expect(response.body).to include ("Voyage")
-#   end
