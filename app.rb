@@ -4,6 +4,8 @@ require_relative 'lib/database_connection'
 require_relative 'lib/booking_repository'
 require_relative 'lib/list_spaces_repository'
 require_relative 'lib/booking'
+require_relative 'lib/user_repository'
+require_relative 'lib/user'
 
 DatabaseConnection.connect
 
@@ -66,5 +68,18 @@ class Application < Sinatra::Base
     return erb(:confirmation_booking)
   end 
 
-end
+  get '/' do
+    return erb(:homepage)
+  end
+  
+  post '/' do
+    user_repo = UserRepository.new
+    new_user = User.new
+    new_user.name = params['name']
+    new_user.email = params['email']
+    new_user.password = params['password']
+    user_repo.create(new_user)
+    return erb(:signup_success)
+  end
 
+end
