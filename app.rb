@@ -34,24 +34,18 @@ class Application < Sinatra::Base
   end
 
   post '/spaces/available' do
-    #binding.irb
     @spaces = SpaceRepository.new
-    #binding.irb
     @booking_repo = BookingRepository.new
-    #binding.irb
     @new_booking = Booking.new
-    #binding.irb
-    #@new_booking.space_id = params[:space_id]
+
     @new_booking.user_id = params[:user_id]
     @new_booking.start_date = params[:start_date]
     @new_booking.end_date = params[:end_date]
-    #@booking_repo.create(@new_booking)
-    #binding.irb
+
     checkin_date = Date.parse(@new_booking.start_date)
     checkout_date = Date.parse(@new_booking.end_date)
-    #binding.irb
+
     user_dates = ((checkin_date .. checkout_date).each{|date| date}).to_a
-    #binding.irb
     
     @booking_clashes = @booking_repo.available_spaces(user_dates)
                       
