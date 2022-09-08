@@ -2,12 +2,22 @@ require "spec_helper"
 require "rack/test"
 require_relative '../../app'
 
+def reset_tables
+    seed_sql = File.read('spec/seeds/bookings_seeds.sql')
+    connection = PG.connect({ host: '127.0.0.1', dbname: 'makersbnb_test' })
+    connection.exec(seed_sql)
+end
+
 describe Application do
 
     include Rack::Test::Methods
 
     let(:app) { Application.new }
 
+    before(:each) do 
+        reset_tables 
+    end
+    
     context "GET /login" do
         it 'returns the login page' do
         response = get('/login')
@@ -41,9 +51,9 @@ describe Application do
         end
     end
 
-    context 'POST /bookings/available' do
+    context 'POST /spaces/available' do
         it 'returns dates once search sent' do
-            response = post('/bookings/available',
+            response = post('/spaces/available',
                 start_date: '2022-09-04', 
                 end_date: '2022-09-10')
             
@@ -52,23 +62,33 @@ describe Application do
             expect(response.body).to include('<td>Beach house</td>')
             expect(response.body).to include('<td>Mountain view</td>')
             expect(response.body).to include('<input type="submit" value="Book now!">')
+ 
         end
+
+        it 'returns only spaces that are not booked on those dates' do
+            response = post('/spaces/available',
+                user_id: 1,
+                start_date: '2022-04-04', 
+                end_date: '2022-04-10')
+            
+            expect(response.status).to eq(200)
+            expect(response.body).to include('<h1>Available Spaces</h1>')
+            expect(response.body).to include('<td>Beach house</td>')
+            expect(response.body).not_to include('<td>Country home</td>')
+            expect(response.body).to include('<input type="submit" value="Book now!">')
+        end
+
     end
 
     context ' POST /bookings' do 
         it'returns a confirmation HTML page' do
-            response = post('bookings', 
-                start_date: '2022-09-04', 
-                end_date: '2022-09-10', 
-                space: '5', 
-                user_id: '1')
+            response = post('bookings')
 
             expect(response.status).to eq(200)
             expect(response.body).to include('<p>Your booking request was sent!</p>')
         end
-    
     end
-
+    
     context 'GET /' do
         it 'homepage with form for new users to sign up' do
             response = get('/')
