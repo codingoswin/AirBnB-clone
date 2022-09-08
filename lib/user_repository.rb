@@ -1,6 +1,6 @@
 require_relative 'user'
 require_relative 'database_connection'
-require 'bcrypt'
+
 
 class UserRepository
     def create(new_user)
@@ -15,6 +15,8 @@ class UserRepository
         new_user.email,
         new_user.password
       ]
+      result_set = DatabaseConnection.exec_params(sql, sql_params)
+
     end
   
     def sign_in(email, submitted_password)
@@ -24,12 +26,12 @@ class UserRepository
   
     #   encrypted_submitted_password = BCrypt::Password.create(submitted_password)
   
-      if user.password == submitted_password
-        # login success
-      else
-        # wrong password
-      end
-    end
+    #   if user.password == submitted_password
+    #     # login success
+    #   else
+    #     # wrong password
+    #   end
+   end
   
     def find_by_email(email)
         sql = 'SELECT id, name, email, password FROM users WHERE email = $1;'

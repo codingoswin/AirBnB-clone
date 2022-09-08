@@ -69,4 +69,12 @@ describe Application do
     
     end
 
+    context 'GET /' do
+        it 'homepage with form for new users to sign up' do
+            response = get('/')
+
+            expect(response.status).to eq(200)
+            expect(response.body).to include ('<h1>Papaya BnB</h1>')
+        end
+    end
 end

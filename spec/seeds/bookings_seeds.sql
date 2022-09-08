@@ -1,8 +1,8 @@
 TRUNCATE TABLE users, spaces, bookings RESTART IDENTITY;
 
-INSERT INTO users (name, email, password) VALUES ('Sam', 'sam@makersbnb.com', 'password!123');
-INSERT INTO users (name, email, password) VALUES ('Pat', 'pat@makersbnb.com', 'password!456');
-INSERT INTO users (name, email, password) VALUES ('John', 'john@makersbnb.com', 'password!789');
+INSERT INTO users (username, email, password) VALUES ('Sam', 'sam@makersbnb.com', 'password!123');
+INSERT INTO users (username, email, password) VALUES ('Pat', 'pat@makersbnb.com', 'password!456');
+INSERT INTO users (username, email, password) VALUES ('John', 'john@makersbnb.com', 'password!789');
 INSERT INTO spaces (name, availability, owner_id) VALUES ('Beach house', false, '1');
 INSERT INTO spaces (name, availability, owner_id) VALUES ('City Apartment', false, '2');
 INSERT INTO spaces (name, availability, owner_id) VALUES ('Country home', false, '3');
