@@ -8,6 +8,27 @@ describe Application do
 
     let(:app) { Application.new }
 
+    context "GET /login" do
+        it 'returns the login page' do
+        response = get('/login')
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>Welcome to Papaya BnB</h1>')
+        end
+    end
+
+    context "POST /login" do
+        it 'returns a successful login page' do
+        response = post(
+            '/login',
+            name: 'Sam',
+            email: 'sam@makersbnb.com',
+            password: 'password!123'
+        )
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<p>You have logged in successfully!</p>')
+        end
+    end
+
     context 'GET bookings/new' do
         it 'has a form to request a booking' do
             response = get('/bookings/new')
