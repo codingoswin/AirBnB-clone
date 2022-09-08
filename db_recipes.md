@@ -95,7 +95,8 @@ If you can answer YES to the two questions, you'll probably have to implement a 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name text,
-    email text
+    email text, 
+    password text
 );
 
 -- Then the table with the foreign key.

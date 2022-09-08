@@ -16,6 +16,10 @@ class Application < Sinatra::Base
     also_reload 'lib/list_spaces_repository'
   end
 
+  get '/login' do
+    return erb(:login)
+  end
+
   get '/bookings/new' do
     @spaces = SpaceRepository.new 
     @space = Space.new 
