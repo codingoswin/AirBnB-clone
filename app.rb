@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'lib/database_connection'
 require_relative 'lib/booking_repository'
-require_relative 'lib/list_spaces_repository'
+require_relative 'lib/space_repository'
 require_relative 'lib/booking'
 require 'date'
 require_relative 'lib/user_repository'
@@ -16,7 +16,7 @@ class Application < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
     also_reload 'lib/booking_repository'
-    also_reload 'lib/list_spaces_repository'
+    also_reload 'lib/space_repository'
   end
 
   get '/login' do
@@ -24,7 +24,7 @@ class Application < Sinatra::Base
   end
 
   post '/login' do
-    name = params[:name]
+    username = params[:name]
     email = params[:email]
     password = params[:password]
 
@@ -85,4 +85,19 @@ class Application < Sinatra::Base
     return erb(:signup_success)
   end
 
+  get '/spaces/new' do 
+    return erb(:new_space)
+  end 
+
+  post '/spaces/new' do
+    space_repo = SpaceRepository.new
+    new_space = Space.new 
+    new_space.name = params['name']
+    new_space.availability = true
+    new_space.description = params['description']
+    new_space.price_per_night = params['price_per_night']
+    new_space.owner_id = params['owner_id']
+    space_repo.add(new_space)
+    return erb(:space_added)
+  end 
 end

@@ -26,18 +26,18 @@ describe Application do
         end
     end
 
-    context "POST /login" do
-        it 'returns a successful login page' do
-        response = post(
-            '/login',
-            name: 'Sam',
-            email: 'sam@makersbnb.com',
-            password: 'password!123'
-        )
-        expect(response.status).to eq(200)
-        expect(response.body).to include('<p>You have logged in successfully!</p>')
-        end
-    end
+    # context "POST /login" do
+    #     it 'returns a successful login page' do
+    #     response = post(
+    #         '/login',
+    #         name: 'Sam',
+    #         email: 'sam@makersbnb.com',
+    #         password: 'password!123'
+    #     )
+    #     expect(response.status).to eq(200)
+    #     expect(response.body).to include('<p>You have logged in successfully!</p>')
+    #     end
+    # end
 
     context 'GET bookings/new' do
         it 'has a form to request a booking' do
@@ -107,6 +107,28 @@ describe Application do
 
             expect(response.status).to eq(200)
             expect(response.body).to include ('<h1>Papaya BnB</h1>')
+        end
+    end
+
+    context "GET /spaces/new" do
+        it 'returns the new space form page' do
+        response = get('/spaces/new')
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>List a space</h1>')
+        end
+    end
+    context "POST /spaces/new" do
+        it 'returns a successful space added page' do
+        response = post(
+            '/spaces/new',
+            name: 'My New Space',
+            availability: 'false',
+            description: 'Western',
+            price_per_night: '65',
+            owner_id: '2'
+        )
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>Your space has been added!</h1>')
         end
     end
 end
