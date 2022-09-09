@@ -1,4 +1,4 @@
-require_relative 'spaces'
+require_relative 'space'
 
 class SpaceRepository
 

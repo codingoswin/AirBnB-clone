@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'lib/database_connection'
 require_relative 'lib/booking_repository'
-require_relative 'lib/list_spaces_repository'
+require_relative 'lib/space_repository'
 require_relative 'lib/booking'
 require 'date'
 require_relative 'lib/user_repository'
@@ -16,7 +16,7 @@ class Application < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
     also_reload 'lib/booking_repository'
-    also_reload 'lib/list_spaces_repository'
+    also_reload 'lib/space_repository'
   end
 
   get '/login' do
