@@ -1,0 +1,17 @@
+<!-- file: views/new_space.erb -->
+
+<h1>List a space</h1>
+
+<form action="/spaces/new" method="POST">
+
+  Owner ID: <input type="text" name="owner_id">
+  <br>
+  Name: <input type="text" name="name">
+  <br>
+  Give a short description of your place: <textarea type="text" name="description">Enter text here...</textarea>
+  <br>
+  Price Per night: <input type="number" name="price_per_night">
+  <br>
+  <input type="submit" value="Add Space">
+
+</form>
