@@ -112,7 +112,7 @@ Response for 200 OK:
 
 ```ruby
 EXAMPLE
-file: spec/integration/application_spec.rb
+file: spec/integration/app_spec.rb
 
 require "spec_helper"
 
@@ -121,35 +121,26 @@ describe Application do
 
     let(:app) { Application.new }
 
-    context "GET /albums/new" do
-        it 'returns the new artist form page' do
-        response = get('/artists/new')
+    context "GET /spaces/new" do
+        it 'returns the new space form page' do
+        response = get('/spaces/new')
         expect(response.status).to eq(200)
-        expect(response.body).to include('<h1>Add an artist</h1>')
+        expect(response.body).to include('<h1>List a space</h1>')
         end
     end
 
-    context "POST /artists" do
-        it 'returns a success page' do
-        # We're now sending a POST request,
-        # simulating the behaviour that the HTML form would have.
+    context "POST /spaces/new" do
+        it 'returns a successful space added page' do
         response = post(
-            '/artists',
+            '/spaces/new',
             name: 'Johnny Cash',
-            genre: 'Western',
+            availability: 'false',
+            description: 'Western',
+            price_per_night: '65',
+            owner_id: '2'
         )
         expect(response.status).to eq(200)
-        expect(response.body).to include('<p>Your artist has been added!</p>')
-        end
-  
-        it 'responds with 400 status if parameters are invalid' do
-        response = post(
-            '/artist',
-            wrong_name: 'Johnny Money',
-            wrong_genre: 'Easter',
-        )
-        expect(response.status).to eq(400)
-        expect(response.body).to eq('<p>No good - try again</p>')
+        expect(response.body).to include('<h1>Your space has been added!</h1>')
         end
   end
 end
