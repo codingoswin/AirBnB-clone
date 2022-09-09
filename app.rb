@@ -23,27 +23,6 @@ class Application < Sinatra::Base
     return erb(:login)
   end
 
-  post '/login' do
-    username = params[:name]
-    email = params[:email]
-    password = params[:password]
-
-    user = UserRepository.find_by_email(email)
-
-    # This is a simplified way of 
-    # checking the password. In a real 
-    # project, you should encrypt the password
-    # stored in the database.
-    if user.password == password
-      # Set the user ID in session
-      # session[:user_id] = user.id
-
-      return erb(:login_success)
-    else
-      return erb(:login_error)
-    end
-  end
-
   get '/bookings/new' do
     return erb(:new_booking)
   end
@@ -68,6 +47,7 @@ class Application < Sinatra::Base
   end 
 
   post '/bookings' do 
+    
     return erb(:confirmation_booking)
   end 
 
@@ -78,7 +58,7 @@ class Application < Sinatra::Base
   post '/' do
     user_repo = UserRepository.new
     new_user = User.new
-    new_user.name = params['name']
+    new_user.username = params['username']
     new_user.email = params['email']
     new_user.password = params['password']
     user_repo.create(new_user)
@@ -100,4 +80,9 @@ class Application < Sinatra::Base
     space_repo.add(new_space)
     return erb(:space_added)
   end 
+
+  get '/check_bookings' do 
+    return erb(:check_bookings)
+  end
+
 end

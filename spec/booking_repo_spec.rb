@@ -75,5 +75,14 @@ RSpec.describe Booking do
             expect(booking_repo.all.last.status).to eq 'confirmed'
         end
     end
+    context 'users have been added' do 
+        it 'will return a booking with a given id' do 
+            booking_repo = BookingRepository.new
+            result = booking_repo.find(1)
+            expect(result[0].start_date).to eq '2022-01-01'
+            expect(result[0].end_date).to eq '2022-01-30'
+            expect(result[0].status).to eq 'unconfirmed'
+        end
+    end 
 end 
 
