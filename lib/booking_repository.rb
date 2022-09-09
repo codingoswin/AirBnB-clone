@@ -22,25 +22,18 @@ class BookingRepository
     end 
 
     def available_spaces(user_dates)
-
         booking_clashes = []
-
         sql = 'SELECT start_date, end_date, space_id FROM bookings;'
-
         result_set = DatabaseConnection.exec_params(sql, [])
 
         result_set.each do |record|
             booking = Booking.new
 
             booking.id = record['id'].to_i
-
             booking.space_id = record['space_id'].to_i
  
-            booking_in_date = record['start_date']
-            booking.start_date = Date.parse(booking_in_date)
-
-            booking_out_date = record['end_date']
-            booking.end_date = Date.parse(booking_out_date)
+            booking.start_date = Date.parse(record['start_date'])
+            booking.end_date = Date.parse(record['end_date'])
 
             date_range = ((booking.start_date .. booking.end_date).each{|date| date}).to_a
 
@@ -52,7 +45,6 @@ class BookingRepository
             end
         end 
         return booking_clashes
-        
     end 
 
     def create(booking)
