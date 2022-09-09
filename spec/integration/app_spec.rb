@@ -109,4 +109,26 @@ describe Application do
             expect(response.body).to include ('<h1>Papaya BnB</h1>')
         end
     end
+
+    context "GET /spaces/new" do
+        it 'returns the new space form page' do
+        response = get('/spaces/new')
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>List a space</h1>')
+        end
+    end
+    context "POST /spaces/new" do
+        it 'returns a successful space added page' do
+        response = post(
+            '/spaces/new',
+            name: 'My New Space',
+            availability: 'false',
+            description: 'Western',
+            price_per_night: '65',
+            owner_id: '2'
+        )
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>Your space has been added!</h1>')
+        end
+    end
 end

@@ -133,7 +133,7 @@ describe Application do
         it 'returns a successful space added page' do
         response = post(
             '/spaces/new',
-            name: 'Johnny Cash',
+            name: 'My New Space',
             availability: 'false',
             description: 'Western',
             price_per_night: '65',
@@ -142,7 +142,7 @@ describe Application do
         expect(response.status).to eq(200)
         expect(response.body).to include('<h1>Your space has been added!</h1>')
         end
-  end
+    end
 end
 ```
 

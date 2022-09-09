@@ -45,18 +45,6 @@ class Application < Sinatra::Base
   end
 
   get '/bookings/new' do
-    #@spaces = SpaceRepository.new 
-    #@space = Space.new 
-    #@booking_repo = BookingRepository.new
-    #@booking = Booking.new
-    #@booking.start_date = params[:start_date]
-    #@booking.end_date = params[:end_date]
-    #@booking.space_id = params[:space_id]
-    #@booking.user_id = params[:user_id]
-    #@booking_repo.create(@booking)
-    #@space.name = params[:name]
-    #@space.availability = params[:availability]
-    #@space.owner_id = params[:owner_id]
     return erb(:new_booking)
   end
 
@@ -97,4 +85,19 @@ class Application < Sinatra::Base
     return erb(:signup_success)
   end
 
+  get '/spaces/new' do 
+    return erb(:new_space)
+  end 
+
+  post '/spaces/new' do
+    space_repo = SpaceRepository.new
+    new_space = Space.new 
+    new_space.name = params['name']
+    new_space.availability = true
+    new_space.description = params['description']
+    new_space.price_per_night = params['price_per_night']
+    new_space.owner_id = params['owner_id']
+    space_repo.add(new_space)
+    return erb(:space_added)
+  end 
 end
