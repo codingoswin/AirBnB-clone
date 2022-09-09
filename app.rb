@@ -24,7 +24,7 @@ class Application < Sinatra::Base
   end
 
   post '/login' do
-    name = params[:name]
+    username = params[:name]
     email = params[:email]
     password = params[:password]
 

@@ -7,7 +7,7 @@ class UserRepository
     #   encrypted_password = BCrypt::Password.create(new_user.password)
   
       sql = '
-        INSERT INTO users (name, email, password)
+        INSERT INTO users (username, email, password)
           VALUES($1, $2, $3);
       '
       sql_params = [
