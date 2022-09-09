@@ -127,4 +127,18 @@ describe Application do
             expect(response.body).to include('<h1>Here are the bookings for your space</h1>')
         end 
     end 
+
+    context "POST /" do 
+        it 'will return a sign up success page' do 
+            response = post(
+            '/',
+            username: "Adrian",
+            email: "my_email@.com",
+            password: "myrealpassword"
+            )
+            expect(response.status).to eq 200
+            expect(response.body).to include '<h1>You are now a signed up user!</h1>'
+            expect(response.body).to include 'List a space'
+        end
+    end 
 end

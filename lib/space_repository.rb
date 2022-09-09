@@ -26,18 +26,4 @@ class SpaceRepository
         result_set = DatabaseConnection.exec_params(sql, [space.name, space.availability, space.description, space.price_per_night, space.owner_id])
         return space
     end
-
-    def check_availability(id)
-        sql = 'UPDATE availability
-                    SET true
-                    FROM spaces
-                    INNER JOIN bookings 
-                        ON bookings.space_id = space.id
-                        WHERE id = $1;'
-        if requested_dates.include?(@start_date..@end_date)
-            DatabaseConnection.exec_params(sql, [space.name, space.availability, space.owner_id])
-        else 
-        end 
-    end 
-
 end

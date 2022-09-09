@@ -60,7 +60,7 @@ class BookingRepository
     end 
 
     def find(id)
-        sql = 'SELECT start_date, end_date, space_id FROM bookings WHERE id = $1;'
+        sql = 'SELECT start_date, end_date, space_id, status FROM bookings WHERE id = $1;'
         result_set = DatabaseConnection.exec_params(sql, [id])
         @spaces = []
         result_set.each do |record|
@@ -68,6 +68,7 @@ class BookingRepository
             booking.start_date = result_set[0]['start_date']
             booking.end_date = result_set[0]['end_date']
             booking.space_id = result_set[0]['space_id']
+            booking.status = result_set[0]['status']
             @spaces << booking
         end 
         return @spaces
