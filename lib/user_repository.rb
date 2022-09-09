@@ -44,7 +44,22 @@ class UserRepository
         user.password = result_set[0]['password']
 
         return user
+    end
+
+      def find_spaces_by_owner_id(id)
+        sql = 'SELECT name, availability FROM spaces WHERE owner_id = $1;'
+        result_set = DatabaseConnection.exec_params(sql, [id])
+        @my_spaces = []
+        space = Space.new
+        space.id = result_set[0]['id'].to_i
+        space.name = result_set[0]['name']
+        space.availability = result_set[0]['availability']
+        space.description = result_set[0]['description']
+        space.price_per_night = result_set[0]['price_per_night']
+        space.owner_id = result_set[0]['owner_id']
+
+        @my_spaces << space.name
+        return @my_spaces
       end
   end
-
 

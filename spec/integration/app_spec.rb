@@ -26,18 +26,6 @@ describe Application do
         end
     end
 
-    # context "POST /login" do
-    #     it 'returns a successful login page' do
-    #     response = post(
-    #         '/login',
-    #         name: 'Sam',
-    #         email: 'sam@makersbnb.com',
-    #         password: 'password!123'
-    #     )
-    #     expect(response.status).to eq(200)
-    #     expect(response.body).to include('<p>You have logged in successfully!</p>')
-    #     end
-    # end
 
     context 'GET bookings/new' do
         it 'has a form to request a booking' do
@@ -131,4 +119,12 @@ describe Application do
         expect(response.body).to include('<h1>Your space has been added!</h1>')
         end
     end
+
+    context "GET /check_bookings" do 
+        it "returns all bookings made on a user's space" do 
+            response = get('/check_bookings')
+            expect(response.status).to eq(200)
+            expect(response.body).to include('<h1>Here are the bookings for your space</h1>')
+        end 
+    end 
 end

@@ -68,6 +68,7 @@ class Application < Sinatra::Base
   end 
 
   post '/bookings' do 
+    
     return erb(:confirmation_booking)
   end 
 
@@ -99,5 +100,28 @@ class Application < Sinatra::Base
     new_space.owner_id = params['owner_id']
     space_repo.add(new_space)
     return erb(:space_added)
+  end 
+
+  get '/check_bookings' do 
+    return erb(:check_bookings)
+  end
+
+  post '/check_bookings' do 
+    @spaces = SpaceRepository.new 
+    new_space = Space.new 
+    new_space.name = params['name']
+    new_space.availability = true
+    new_space.description = params['description']
+    new_space.price_per_night = params['price_per_night']
+    new_space.owner_id = params['owner_id']
+    space_repo.add(new_space)
+    @my_spaces = @spaces.find_spaces_by_owner_id
+    return erb(:bookings_received)
+  end 
+
+  get '/space_dates/:id' do 
+    booking_repo = BookingRepository.new 
+    @space = booking_repo.find(params[:id])
+    return erb(:space_dates)
   end 
 end
